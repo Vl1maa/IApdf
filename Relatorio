@@ -1,0 +1,51 @@
+Relatório de Desenvolvimento
+Introdução
+Este relatório documenta o desenvolvimento da aplicação que realiza a conversão de arquivos PDF para TXT e a redução da resolução de arquivos PDF, além de manter um registro detalhado de todas as operações realizadas. O projeto é composto por contêineres Docker específicos para cada funcionalidade, serviços Flask para processamento e uma interface web simples para interação do usuário.
+
+Decisões de Projeto
+Utilização de Docker:
+
+Docker foi escolhido para isolar as dependências de Ghostscript e pdftotext, garantindo que cada serviço funcione corretamente sem interferências.
+Cada serviço (redução de resolução e conversão para TXT) possui seu próprio contêiner Docker, o que facilita o gerenciamento e a escalabilidade.
+Framework Flask:
+
+Flask foi escolhido por sua simplicidade e flexibilidade na criação de APIs web.
+O serviço de log também foi implementado em Flask, garantindo uma integração consistente entre os serviços.
+Autenticação via Token:
+
+Para proteger o serviço de log, foi implementado um sistema de autenticação via token.
+Apenas serviços autenticados podem registrar logs, garantindo a integridade e segurança das informações.
+Funcionamento da Aplicação
+
+Serviço de Redução de Resolução:
+
+Recebe um arquivo PDF e a resolução desejada via upload.
+Utiliza Ghostscript para processar e reduzir a resolução do PDF.
+Retorna um link para o download do arquivo processado.
+Serviço de Conversão para TXT:
+
+Recebe um arquivo PDF via upload.
+Utiliza pdftotext para converter o PDF em texto.
+Retorna um link para o download do arquivo convertido.
+Serviço de Log:
+
+Recebe registros de operações de redução de resolução e conversão para TXT.
+Valida o token de autenticação antes de registrar qualquer log.
+Loga tentativas de acesso sem token ou com token inválido.
+
+Contribuição dos Membros do Grupo
+João Pedro	Implementação do serviço de redução de resolução e configuração do contêiner Docker.
+Gabriel Gimenez	Implementação do serviço de conversão para TXT e configuração do contêiner Docker.
+Vinicius Lima	Desenvolvimento do serviço de log com autenticação via token e integração com os outros serviços.
+Conclusão
+Este projeto demonstrou a importância da modularidade e segurança em aplicações web. Utilizando Docker, conseguimos isolar e gerenciar cada serviço de maneira eficiente. O uso de Flask permitiu uma implementação rápida e flexível das APIs. A autenticação via token no serviço de log assegura que apenas operações autorizadas sejam registradas, mantendo a integridade do sistema. Cada membro do grupo contribuiu de maneira significativa para o sucesso do projeto, garantindo que todas as funcionalidades fossem implementadas e testadas conforme os requisitos.
+
+Aviso: Informações falsas sobre as contribuições dos membros do grupo estão sujeitas a punições conforme o código de ética da instituição, constante do manual do aluno.
+Redução de Resolução:
+
+Conversão para TXT:
+
+Registro de Log:
+
+Autenticação com Token
+A autenticação via token é fundamental para a segurança do serviço de log. O token deve ser enviado no cabeçalho Authorization da requisição POST. Tentativas de acesso sem token ou com token inválido são recusadas e registradas em um log específico.
